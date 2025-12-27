@@ -3,3 +3,57 @@
     @media screen and (min-width: 0px) and (max-width: 480px) {
        #logo{display: none;}
     }
+nav {
+            background-color: #5f5f5f;
+            overflow: hidden;
+}
+nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            padding: 15px 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav ul li a:hover {
+            color: #d49de6;
+        }
+    .hamburger {
+            display: none;
+            cursor: pointer;
+            padding: 15px;
+            float: left;
+        }
+        .hamburger div {
+            width: 30px;
+            height: 3px;
+            background-color: white;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                text-align: center;
+                width: 100%;
+                background-color: #333;
+            }
+            .hamburger {
+                display: block;
+            }
+        }
