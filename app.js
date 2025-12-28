@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
             bookings[selectedDate].push(selectedTime);
             saveBookings();
 
-            alertBox.innerHTML = `<div class="alert alert-success">Sikeresen lefoglaltad: ${selectedDate} ${selectedTime}-kor!<br>2 órás kezelés.</div>`;
+            alertBox.innerHTML = `<div class="alert alert-success">Sikeresen lefoglaltad: ${selectedDate} ${selectedTime}-ra!<br>2 órás kezelés.</div>`;
 
             selectedTime = null;
             confirmBtn.disabled = true;
