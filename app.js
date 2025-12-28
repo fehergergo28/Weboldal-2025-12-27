@@ -175,17 +175,5 @@ if (loginForm) {
     });
 }
 
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
 
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
-
-            if (email && password) {
-                alert('Sikeres bejelentkezés! Átirányítunk az időpontfoglalásra...');
-                window.location.href = 'időpont.html'; 
-            } else {
-                alert('Kérlek töltsd ki mindkét mezőt!');
-            }
-        });
 
