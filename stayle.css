@@ -183,3 +183,143 @@ nav ul {
         align-self: flex-end;
     }
 }
+
+
+body {
+            background: linear-gradient(135deg, #f2b3ff20, #98e7ff30), #ffffff;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        main {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .register-container {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: 0 15px 40px rgba(152, 231, 255, 0.3);
+            border: 1px solid rgba(242, 179, 255, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .register-title {
+            text-align: center;
+            font-family: 'Brush Script MT', cursive;
+            font-size: 3rem;
+            color: rgb(152, 231, 255);
+            margin-bottom: 10px;
+            text-shadow: 0 2px 8px rgba(152, 231, 255, 0.3);
+        }
+
+        .register-subtitle {
+            text-align: center;
+            color: rgb(153, 153, 153);
+            margin-bottom: 35px;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: rgb(242, 179, 255);
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid rgba(242, 179, 255, 0.4);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: rgb(152, 231, 255);
+            background: white;
+            box-shadow: 0 0 15px rgba(152, 231, 255, 0.4);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+            color: rgb(119, 119, 119);
+        }
+
+        .checkbox-group input {
+            margin-right: 10px;
+            transform: scale(1.3);
+            accent-color: #f2b3ff;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #f2b3ff, #98e7ff);
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(152, 231, 255, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(152, 231, 255, 0.5);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            color: rgb(119, 119, 119);
+        }
+
+        .login-link a {
+            color: rgb(242, 179, 255);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobil optimalizálás */
+        @media (max-width: 480px) {
+            .register-title {
+                font-size: 2.5rem;
+            }
+            
+            .register-container {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+        }
+
+        .newsletter-group input {
+            margin-right: 10px;
+            margin-top: 4px;
+            transform: scale(1.3);
+            accent-color: rgb(152, 231, 255);
+        }
