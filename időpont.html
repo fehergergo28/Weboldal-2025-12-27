@@ -31,16 +31,34 @@
 
         
         <ul id="menu">
-            <li><a href="index.html">Kezdőlap</a></li>
-            <li><a href="galéria.html">Galéria</a></li>
-            <li><a href="árak.html">Árak</a></li>
-            <li><a href="kapcsolat.html">Kapcsolat</a></li>
-            <li><a href="időpont.html">Időpontfoglalás</a></li>
-            <li><a href="bejelent.html">Bejelentkezés</a></li>
-            <li><a href="regi.html">Regisztráció</a></li>
+            <li><a href="index.html" class="active">Kezdőlap</a></li>
+            <li><a href="galéria.html" class="active">Galéria</a></li>
+            <li><a href="árak.html" class="active">Árak</a></li>
+            <li><a href="kapcsolat.html" class="active">Kapcsolat</a></li>
+            <li><a href="időpont.html" class="active">Időpontfoglalás</a></li>
+            <li><a href="bejelent.html" class="active">Bejelentkezés</a></li>
+            <li><a href="regi.html" class="active">Regisztráció</a></li>
         </ul>
 </nav>
+<main id="booking" >
+<div class="booking-container">
+            <h1 class="booking-title">Időpontfoglalás</h1>
+            <p class="booking-subtitle">Válassz egy szabad időpontot a naptárból!</p>
 
+            <div id="alertBox"></div>
+
+            <div class="date-selector">
+                <label for="dateInput"><strong>Válassz dátumot:</strong></label><br><br>
+                <input type="date" id="dateInput" required>
+            </div>
+
+            <div class="time-slots" id="timeSlots">
+             
+            </div>
+
+            <button class="confirm-btn" id="confirmBtn" disabled>Foglalás megerősítése</button>
+        </div>
+</main>
 
 
 
