@@ -5,101 +5,187 @@ function toggleMenu() {
     }
 }
 
+function toggleMenu() {
+    const menu = document.getElementById('menu');
+    if (menu) {
+        menu.classList.toggle('active');
+    }
+}
 
-document.addEventListener('DOMContentLoaded', () => {
-    const dateInput = document.getElementById('dateInput');
-    if (!dateInput) return;
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('registerForm');
+    const fullnameInput = document.getElementById('fullname');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const passwordInput = document.getElementById('password');
+    const password2Input = document.getElementById('password2');
+    const termsCheckbox = document.getElementById('terms');
+    const submitBtn = document.querySelector('.submit-btn');
 
-    const timeSlotsContainer = document.getElementById('timeSlots');
-    const confirmBtn = document.getElementById('confirmBtn');
-    const alertBox = document.getElementById('alertBox');
-
-    let selectedTime = null;
-
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.min = today;
-    dateInput.value = today;
-
-    let bookings = JSON.parse(localStorage.getItem('beautyNailsBookings')) || {};
-
-    function saveBookings() {
-        localStorage.setItem('beautyNailsBookings', JSON.stringify(bookings));
+    function showError(input, message) {
+        clearError(input);
+        const error = document.createElement('div');
+        error.className = 'error-message';
+        error.textContent = message;
+        input.parentNode.appendChild(error);
+        input.style.borderColor = 'rgba(231, 76, 60, 1)';
     }
 
-    function generateTimeSlots() {
-        const slots = [];
-        for (let hour = 9; hour <= 17; hour++) {
-            slots.push(`${hour.toString().padStart(2, '0')}:00`);
-            if (hour < 17) slots.push(`${hour.toString().padStart(2, '0')}:30`);
-        }
-        return slots;
+    function clearError(input) {
+        const error = input.parentNode.querySelector('.error-message');
+        if (error) error.remove();
+        input.style.borderColor = 'rgba(242, 179, 255, 0.4)';
     }
 
-    const availableSlots = generateTimeSlots();
-
-    function renderTimeSlots() {
-        const selectedDate = dateInput.value;
-        if (!selectedDate) {
-            timeSlotsContainer.innerHTML = '<p style="text-align:center; grid-column:1/-1;">Kérlek válassz egy dátumot!</p>';
-            return;
+    function validateFullname() {
+        const value = fullnameInput.value.trim();
+        if (value === '') {
+            showError(fullnameInput, 'A teljes név megadása kötelező!');
+            return false;
         }
+        clearError(fullnameInput);
+        return true;
+    }
 
-        const bookedTimes = bookings[selectedDate] || [];
-        timeSlotsContainer.innerHTML = '';
+    function validateEmail() {
+        const value = emailInput.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (value === '') {
+            showError(emailInput, 'Az e-mail cím megadása kötelező!');
+            return false;
+        }
+        if (!emailRegex.test(value)) {
+            showError(emailInput, 'Érvénytelen e-mail cím formátum!');
+            return false;
+        }
+        clearError(emailInput);
+        return true;
+    }
 
-        availableSlots.forEach(time => {
-            const isBooked = bookedTimes.includes(time);
-            const slotDiv = document.createElement('div');
-            slotDiv.className = `time-slot ${isBooked ? 'booked' : 'available'} ${selectedTime === time ? 'selected' : ''}`;
-            slotDiv.textContent = time;
+    function validatePhone() {
+        const value = phoneInput.value.trim().replace(/\s+/g, '');
+        if (value === '') {
+            showError(phoneInput, 'A telefonszám megadása kötelező!');
+            return false;
+        }
+        if (value.length < 8) {
+            showError(phoneInput, 'A telefonszám túl rövid!');
+            return false;
+        }
+        clearError(phoneInput);
+        return true;
+    }
 
-            if (!isBooked) {
-                slotDiv.onclick = () => {
-                    selectedTime = time;
-                    renderTimeSlots();
-                    confirmBtn.disabled = false;
-                };
+    function validatePassword() {
+        const value = passwordInput.value;
+        clearError(passwordInput);
+        if (value.length < 8) {
+            showError(passwordInput, 'A jelszónak legalább 8 karakterből kell állnia!');
+            return false;
+        }
+        if (value.length > 20) {
+            showError(passwordInput, 'A jelszó maximum 20 karakter lehet!');
+            return false;
+        }
+        return true;
+    }
+
+    function validatePasswordMatch() {
+        clearError(password2Input);
+        if (passwordInput.value !== password2Input.value) {
+            showError(password2Input, 'A két jelszó nem egyezik!');
+            return false;
+        }
+        return true;
+    }
+
+    function validateTerms() {
+        if (!termsCheckbox.checked) {
+            termsCheckbox.parentNode.style.color = '#e74c3c';
+            return false;
+        } else {
+            termsCheckbox.parentNode.style.color = '#777';
+            return true;
+        }
+    }
+
+    function updateSubmitButton() {
+        const allValid = 
+            validateFullname() &&
+            validateEmail() &&
+            validatePhone() &&
+            validatePassword() &&
+            validatePasswordMatch() &&
+            validateTerms();
+
+        submitBtn.disabled = !allValid;
+    }
+
+    
+    fullnameInput.addEventListener('input', () => { validateFullname(); updateSubmitButton(); });
+    emailInput.addEventListener('input', () => { validateEmail(); updateSubmitButton(); });
+    phoneInput.addEventListener('input', () => { validatePhone(); updateSubmitButton(); });
+    passwordInput.addEventListener('input', () => { validatePassword(); validatePasswordMatch(); updateSubmitButton(); });
+    password2Input.addEventListener('input', () => { validatePasswordMatch(); updateSubmitButton(); });
+    termsCheckbox.addEventListener('change', () => { validateTerms(); updateSubmitButton(); });
+
+    
+    form.addEventListener('submit', function (e) {
+        e.preventDefault(); 
+
+        const allValid = 
+            validateFullname() && 
+            validateEmail() && 
+            validatePhone() && 
+            validatePassword() && 
+            validatePasswordMatch() && 
+            validateTerms();
+
+        if (!allValid) {
+            if (!validateTerms()) {
+                alert('El kell fogadni az Adatkezelési tájékoztatót a regisztrációhoz!');
             }
-
-            timeSlotsContainer.appendChild(slotDiv);
-        });
-    }
-
-    confirmBtn.onclick = () => {
-        const selectedDate = dateInput.value;
-        if (!selectedDate || !selectedTime) return;
-
-        const isLoggedIn = localStorage.getItem('beautyNailsLoggedIn') === 'true';
-
-        if (!isLoggedIn) {
-            alertBox.innerHTML = '<div class="alert alert-warning">Kérlek előbb jelentkezz be a foglaláshoz!</div>';
-            setTimeout(() => { window.location.href = 'bejelent.html'; }, 2000);
+            updateSubmitButton();
             return;
         }
 
-        let ending = 're';
-        if (selectedTime.endsWith(':30')) {
-            ending = 'ra';
-        } else if (selectedTime === '13:00' || selectedTime === '16:00') {
-            ending = 'ra';
-        }
+       
+        alert('Sikeres regisztráció! Átirányítunk a bejelentkezésre...');
+        window.location.href = 'bejelent.html'; 
+    });
 
-        if (!bookings[selectedDate]) bookings[selectedDate] = [];
-        bookings[selectedDate].push(selectedTime);
-        saveBookings();
-
-        alertBox.innerHTML = `
-            <div class="alert alert-success">
-                Sikeresen lefoglaltad: ${selectedDate} ${selectedTime}-${ending}!<br>
-                2 órás kezelés.
-            </div>
-        `;
-
-        selectedTime = null;
-        confirmBtn.disabled = true;
-        renderTimeSlots();
-    };
-
-    dateInput.addEventListener('change', renderTimeSlots);
-    renderTimeSlots();
+    updateSubmitButton();
 });
+
+
+const loginForm = document.getElementById('loginForm');
+if (loginForm) {
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const email = document.getElementById('email')?.value.trim();
+        const password = document.getElementById('password')?.value;
+
+        if (email && password) {
+            alert('Sikeres bejelentkezés! Átirányítunk az időpontfoglalásra...');
+            window.location.href = 'időpont.html'; 
+        } else {
+            alert('Kérlek töltsd ki mindkét mezőt!');
+        }
+    });
+}
+
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (email && password) {
+                alert('Sikeres bejelentkezés! Átirányítunk az időpontfoglalásra...');
+                window.location.href = 'időpont.html'; 
+            } else {
+                alert('Kérlek töltsd ki mindkét mezőt!');
+            }
+        });
+
