@@ -57,3 +57,129 @@ nav ul {
                 display: block;
             }
         }
+
+        .price-section {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: rgb(143, 220, 243);
+    font-family: 'Brush Script MT', cursive;
+    text-shadow: 0 2px 10px rgba(152, 231, 255, 0.3);
+}
+
+.price-card {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(152, 231, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(242, 179, 255, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.price-card:hover {
+    transform: translateY(-5px);
+}
+
+.price-card h3 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: rgb(242, 179, 255);
+    margin-bottom: 20px;
+    font-family: 'Brush Script MT', cursive;
+}
+
+
+.price-grid {
+    display: grid;
+    gap: 1px;
+    background: rgba(152, 231, 255, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.price-grid.wide {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.price-grid:not(.wide) {
+    grid-template-columns: 1fr 1fr;
+}
+
+.price-grid .row {
+    display: contents;
+}
+
+.price-grid .row > span {
+    padding: 16px 20px;
+    text-align: center;
+    background: white;
+    font-size: 1.1rem;
+}
+
+.price-grid .header {
+    font-weight: bold;
+    color: rgb(242, 179, 255);
+    font-size: 1.2rem;
+}
+
+.price-grid .header > span {
+    background: linear-gradient(135deg, #f2b3ff, #98e7ff);
+    color: white;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+
+.price-list .item {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(242, 179, 255, 0.2);
+    font-size: 1.1rem;
+}
+
+.price-list .item:last-child {
+    border-bottom: none;
+}
+
+.price-list .price {
+    font-weight: 600;
+    color: rgb(242, 179, 255);
+}
+
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .price-card h3 {
+        font-size: 1.6rem;
+    }
+    
+    .price-grid.wide {
+        grid-template-columns: 1fr;
+    }
+    
+    .price-grid.wide .row > span:nth-child(2),
+    .price-grid.wide .row > span:nth-child(3) {
+        padding-left: 40px;
+    }
+    
+    .price-list .item {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .price-list .price {
+        align-self: flex-end;
+    }
+}
