@@ -45,7 +45,7 @@
             <h1 class="register-title">Regisztráció</h1>
             <p class="register-subtitle">Hozz létre fiókot, és foglalj időpontot könnyedén!</p>
 
-            <form action="#" method="POST"> <!-- Ide jön majd a backend feldolgozás -->
+            <form id="registerForm"> 
                 <div class="form-group">
                     <label for="fullname">Teljes név</label>
                     <input type="text" id="fullname" name="fullname" required placeholder="Pl. Fehér Gergő">
@@ -73,10 +73,10 @@
 
                 <div class="checkbox-group">
                     <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">Elfogadom az <a href="#" style="color:#f2b3ff;">Adatkezelési tájékoztatót</a> és a <a href="#" style="color:#f2b3ff;">Felhasználási feltételeket</a></label>
+                    <label for="terms">Elfogadom az <a href="#" style="color:rgb(242, 179, 255);">Adatkezelési tájékoztatót</a> és a <a href="#" style="color:rgb(242, 179, 255);">Felhasználási feltételeket</a></label>
                 </div>
 
-                <div class="newsletter-group">
+                <div class="checkbox-group">
                     <input type="checkbox" id="newsletter" name="newsletter">
                     <label for="newsletter">Szeretnék hírlevelet kapni akciókról, új szolgáltatásokról és szépségtippekről </label>
                 </div>

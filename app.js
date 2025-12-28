@@ -131,6 +131,28 @@ function toggleMenu() {
                 
             });
 
+            document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+
+            const password = document.getElementById('password').value;
+            const password2 = document.getElementById('password2').value;
+            const terms = document.getElementById('terms').checked;
+
+            if (password !== password2) {
+                alert('A két jelszó nem egyezik! Kérlek javítsd ki.');
+                return;
+            }
+
+            if (!terms) {
+                alert('El kell fogadnod az Általános Szerződési Feltételeket a regisztrációhoz!');
+                return;
+            }
+
+            
+            alert('Sikeres regisztráció! Átirányítunk a bejelentkezéshez...');
+            window.location.href = 'bejelent.html'; 
+        });
+
             
             updateSubmitButton();
         });
