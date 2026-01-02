@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Kapcsolat-Beauty Nails</title>
     <link rel="stylesheet" href="stayle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="footer.css">
@@ -21,15 +21,18 @@
             flex-wrap: wrap;
             gap: 40px;
             margin-top: 40px;
+            width: 100%;
         }
 
         .contact-info {
-            flex: 1;
+            flex: 1 1 300px;
             min-width: 300px;
             background: linear-gradient(135deg, #f2b3ff, #98e7ff);
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;  
+            box-sizing: border-box;
         }
 
         .contact-info h2 {
@@ -78,19 +81,15 @@
         }
 
         .map-container {
-            flex: 1;
-            min-width: 300px;
+            flex: 1 1 300px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .map-container iframe {
-            width: 100%;
-            height: 450px;
-            border: 0;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            height: 350px;
         }
 
-        
         .directions-btn {
             display: inline-block;
             margin-top: 30px;
@@ -104,6 +103,13 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             transition: background 0.3s;
         }
+        
+        .directions-btn {
+            display: block;
+                text-align: center;
+                width: 100%;
+                box-sizing: border-box;
+        }
 
         .directions-btn:hover {
             background: #7acfff;
@@ -112,8 +118,20 @@
         @media (max-width: 768px) {
             .contact-container {
                 flex-direction: column;
+                gap: 30px;
             }
         }
+
+        @media (max-width: 480px) {
+            .contact-info {
+                padding: 20px;  
+            }
+        }
+        .contact-info,
+            .map-container {
+                flex: 1 1 auto;  
+                min-width: 0;    
+            }
     </style>
 </head>
 <body>

@@ -149,6 +149,32 @@
             transform: scale(1.1);
         }
 
+        .gallery-btn-wrapper {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.gallery-cta-btn {
+    background: white;
+    color: rgb(242, 179, 255);
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(152, 231, 255, 0.4);
+    display: inline-block;
+    white-space: nowrap; 
+}
+
+
+.gallery-cta-btn:hover {
+    background: rgb(152, 231, 255);
+    color: white;
+    transform: translateY(-3px);
+}
+
         .testimonials-section {
             max-width: 1200px;
             margin: 60px auto;
@@ -195,5 +221,13 @@
     .hero-cta {
         padding: 14px 24px;
         font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-cta-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+        max-width: 85%;
     }
 }
