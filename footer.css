@@ -1,0 +1,91 @@
+footer {
+            background: linear-gradient(to bottom, #f2b3ff, #98e7ff);
+            color: white;
+            padding: 40px 20px 20px;
+            margin-top: 80px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 30px;
+        }
+
+        .footer-links h3,
+        .footer-contact h3,
+        .footer-social h3 {
+            font-family: "Brush Script MT", cursive;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-contact p {
+            margin: 8px 0;
+            font-size: 15px;
+        }
+
+        .footer-contact a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-social a {
+            font-size: 36px;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .footer-social a:hover {
+            transform: translateY(-4px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+            }
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 25px;
+            }
+            .footer-logo svg {
+                width: 200px;
+                height: auto;
+                margin: 0 auto;
+                display: block;
+            }
+        }
