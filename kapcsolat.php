@@ -135,40 +135,12 @@
     </style>
 </head>
 <body>
-    <header>
-     <div id="logo">
-        <svg width="400" height="200">
-            <defs>
-                <linearGradient id="szinatmenet" x1="0%" x2="0%" y1="0%" y2="100%">
-<stop  stop-color="rgb(242, 179, 255)" offset="0%"/>
-<stop stop-color="white" offset="60%"/>
-<stop stop-color="rgb(152, 231, 255)" offset="100%"/>
-                </linearGradient>
-            </defs>
-            <ellipse cx="200" cy="100" rx="200" ry="80" fill="url(#szinatmenet)"/>
-            <text fill="rgb(152, 231, 255)" x="90" y="110" font-size="50" font-family="Brush Script MT">Beauty Nails</text>
-        </svg>
-    </div>
-</header>
-<nav>
-<div class="hamburger" onclick="toggleMenu()">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-
-        
-        <ul id="menu">
-             <li><a href="index.html" class="active">Kezdőlap</a></li>
-            <li><a href="galéria.html" class="active">Galéria</a></li>
-            <li><a href="árak.html" class="active">Árak</a></li>
-            <li><a href="kapcsolat.html" class="active">Kapcsolat</a></li>
-            <li><a href="időpont.html" class="active">Időpontfoglalás</a></li>
-            <li><a href="bejelent.html" class="active">Bejelentkezés</a></li>
-            <li><a href="regi.html" class="active">Regisztráció</a></li>
-        </ul>
-</nav>
-
+    
+<?php
+include 'config.php';
+$page_title = "Kapcsolat - Beauty Nails";
+include 'includes/header.php';
+?>
 <main>
         <h1 style="text-align:center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
  font-size:50px; color:#98e7ff;">Kapcsolat</h1>
@@ -208,61 +180,7 @@
             </div>
         </div>
     </main>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-logo">
-                <svg width="220" height="110" viewBox="0 0 220 110">
-                    <defs>
-                        <linearGradient id="szinatmenet-footer" x1="0%" x2="0%" y1="0%" y2="100%">
-                            <stop stop-color="rgb(242, 179, 255)" offset="0%"/>
-                            <stop stop-color="white" offset="60%"/>
-                            <stop stop-color="rgb(152, 231, 255)" offset="100%"/>
-                        </linearGradient>
-                    </defs>
-                    <ellipse cx="110" cy="55" rx="110" ry="44" fill="url(#szinatmenet-footer)"/>
-                   
-                    <text fill="rgb(152, 231, 255)" 
-                          x="110" 
-                          y="65" 
-                          font-size="28" 
-                          font-family="Brush Script MT" 
-                          text-anchor="middle" 
-                          dominant-baseline="middle">
-                        Beauty Nails
-                    </text>
-                </svg>
-                <p style="font-size:13px; margin-top:10px; text-align:center;">© 2026 Beauty Nails. Minden jog fenntartva.</p>
-            </div>
-
-            <div class="footer-links">
-                <h3>Menü</h3>
-                <ul>
-                    <li><a href="index.html">Kezdőlap</a></li>
-                    <li><a href="galéria.html">Galéria</a></li>
-                    <li><a href="árak.html">Árak</a></li>
-                    <li><a href="kapcsolat.html">Kapcsolat</a></li>
-                    <li><a href="időpont.html">Időpontfoglalás</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-contact">
-                <h3>Kapcsolat</h3>
-                <p>📍 Budapest, Gyönyör utca 12, 1094 </p>
-                <p>📞 <a href="tel:707769515">06 70 776 9515</a></p>
-                <p>✉️ <a href="mailto:beautynails@gamil.com">beautynails@gamil.com</a></p>
-            </div>
-
-            <div class="footer-social">
-                <h3>Kövess minket</h3>
-                <a href="https://www.instagram.com/beautynails_budapest/" target="_blank" aria-label="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-            </div>
-        </div>
-
-    </footer>
-
-
+    <?php include 'includes/footer.php'; ?>
 
 
 <script src="app.js"></script>

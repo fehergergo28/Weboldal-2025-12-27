@@ -12,11 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     dateInput.min = today;
     dateInput.value = today;
 
-    let bookings = JSON.parse(localStorage.getItem('beautyNailsBookings')) || {};
-
-    function saveBookings() {
-        localStorage.setItem('beautyNailsBookings', JSON.stringify(bookings));
-    }
+    const availableSlots = generateTimeSlots();
 
     function generateTimeSlots() {
         const slots = [];
@@ -27,20 +23,32 @@ document.addEventListener('DOMContentLoaded', () => {
         return slots;
     }
 
-    const availableSlots = generateTimeSlots();
-
-    function renderTimeSlots() {
+    async function renderTimeSlots() {
         const selectedDate = dateInput.value;
-        if (!selectedDate) {
-            timeSlotsContainer.innerHTML = '<p style="text-align:center; grid-column:1/-1;">Kérlek válassz egy dátumot!</p>';
-            return;
+        if (!selectedDate) return;
+
+        // Foglalt időpontok lekérése az adatbázisból
+        let bookedTimes = [];
+        try {
+            const response = await fetch('/beautynails/get_booked_times.php?date=' + selectedDate);
+            bookedTimes = await response.json();
+        } catch (e) {
+            console.error(e);
         }
 
-        const bookedTimes = bookings[selectedDate] || [];
+        const isToday = (selectedDate === today);
+        const currentTime = new Date().toTimeString().slice(0, 5); // pl. "15:32"
+
         timeSlotsContainer.innerHTML = '';
 
         availableSlots.forEach(time => {
-            const isBooked = bookedTimes.includes(time);
+            let isBooked = bookedTimes.includes(time);
+
+            // Ha MAI nap van és az időpont már elmúlt → foglaltnak jelöljük
+            if (isToday && time < currentTime) {
+                isBooked = true;
+            }
+
             const slotDiv = document.createElement('div');
             slotDiv.className = `time-slot ${isBooked ? 'booked' : 'available'} ${selectedTime === time ? 'selected' : ''}`;
             slotDiv.textContent = time;
@@ -51,45 +59,35 @@ document.addEventListener('DOMContentLoaded', () => {
                     renderTimeSlots();
                     confirmBtn.disabled = false;
                 };
+            } else {
+                slotDiv.style.cursor = 'not-allowed';
+                slotDiv.style.opacity = '0.6';
             }
 
             timeSlotsContainer.appendChild(slotDiv);
         });
     }
 
+    // Foglalás
     confirmBtn.onclick = () => {
         const selectedDate = dateInput.value;
         if (!selectedDate || !selectedTime) return;
 
-        const isLoggedIn = localStorage.getItem('beautyNailsLoggedIn') === 'true';
-
-        if (!isLoggedIn) {
-            alertBox.innerHTML = '<div class="alert alert-warning">Kérlek előbb jelentkezz be a foglaláshoz!</div>';
-            setTimeout(() => { window.location.href = 'bejelent.html'; }, 2000);
-            return;
-        }
-
-        let ending = 're';
-        if (selectedTime.endsWith(':30')) {
-            ending = 'ra';
-        } else if (selectedTime === '13:00' || selectedTime === '16:00') {
-            ending = 'ra';
-        }
-
-        if (!bookings[selectedDate]) bookings[selectedDate] = [];
-        bookings[selectedDate].push(selectedTime);
-        saveBookings();
-
-        alertBox.innerHTML = `
-            <div class="alert alert-success">
-                Sikeresen lefoglaltad: ${selectedDate} ${selectedTime}-${ending}!<br>
-                2 órás kezelés.
-            </div>
-        `;
-
-        selectedTime = null;
-        confirmBtn.disabled = true;
-        renderTimeSlots();
+        fetch('/beautynails/foglalas.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `date=${encodeURIComponent(selectedDate)}&time=${encodeURIComponent(selectedTime)}`
+        })
+        .then(r => r.text())
+        .then(data => {
+            alertBox.innerHTML = `<div class="alert alert-success">${data}</div>`;
+            selectedTime = null;
+            confirmBtn.disabled = true;
+            renderTimeSlots();
+        })
+        .catch(() => {
+            alertBox.innerHTML = `<div class="alert alert-warning">Hiba történt!</div>`;
+        });
     };
 
     dateInput.addEventListener('change', renderTimeSlots);

@@ -5,12 +5,7 @@ function toggleMenu() {
     }
 }
 
-function toggleMenu() {
-    const menu = document.getElementById('menu');
-    if (menu) {
-        menu.classList.toggle('active');
-    }
-}
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('registerForm');
@@ -174,6 +169,3 @@ if (loginForm) {
         }
     });
 }
-
-
-
